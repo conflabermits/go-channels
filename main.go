@@ -5,10 +5,18 @@ import (
 	"time"
 )
 
-func worker(done chan bool) {
-	fmt.Print("working...")
+func doWork(count int) {
+	for i := 0; i < count; i++ {
+		time.Sleep(time.Second)
+		fmt.Print(".")
+	}
 	time.Sleep(time.Second)
-	fmt.Println("done")
+}
+
+func worker(done chan bool) {
+	fmt.Print("working")
+	doWork(3)
+	fmt.Println(" done")
 	done <- true
 }
 
